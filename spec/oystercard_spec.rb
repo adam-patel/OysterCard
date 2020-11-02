@@ -17,6 +17,20 @@ describe Oystercard do
     expect{subject.top_up(10)}.to change {subject.balance}.from(0).to(10)
   end
 
+  it "balance cannot exceed £90" do
+    expect{subject.top_up(91)}.to raise_error("Balance cannot exceed £90")
+  end
+
+  it "should respond to the deduct method" do
+    expect(subject).to respond_to(:deduct).with(1).argument
+  end
+
+  it "should deduct money when charged" do
+    subject.top_up(10)
+    expect{subject.deduct(10)}.to change {subject.balance}.from(10).to(0)
+  end
+
+
 end
 
 
