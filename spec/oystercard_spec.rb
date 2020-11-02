@@ -9,6 +9,14 @@ describe Oystercard do
     expect(subject.balance).to eq(0)
   end
 
+  it "responds to top_up method" do
+    expect(subject).to respond_to(:top_up)
+  end
+
+  it "can add currency to the balance" do
+    expect{subject.top_up(10)}.to change {subject.balance}.from(0).to(10)
+  end
+
 end
 
 
